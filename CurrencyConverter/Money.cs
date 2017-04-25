@@ -12,6 +12,10 @@ namespace CurrencyConverter
     {
         // Base URL for the API
         const string baseUrl = "https://api.fixer.io/";
+
+        /// <summary>
+        /// Return the Date
+        /// </summary>
         public static string Date { get {
                 string url = baseUrl + "latest";
                 WebClient wc = new WebClient();
@@ -21,6 +25,7 @@ namespace CurrencyConverter
 
                 return (string)o["date"];
             } }
+        
         /// <summary>
         /// Get a List with all available conversion rates
         /// </summary>
@@ -36,8 +41,6 @@ namespace CurrencyConverter
             
             JObject o = JObject.Parse(jsonData);
             JToken rates = o["rates"];          
-
-
 
             IList<Rate> RatesList = new List<Rate>();
             foreach (JProperty item in rates)
@@ -61,20 +64,15 @@ namespace CurrencyConverter
         /// <returns></returns>
         public static double FromTo(double Value, Currency From, Currency To)
         {
-            string url = "https://api.fixer.io/latest?base=" + From.Value;
+            string url = baseUrl + "latest?base=" + From.Value;
 
             WebClient wc = new WebClient();
             string jsonData = wc.DownloadString(url);
 
             JObject o = JObject.Parse(jsonData);
-
-            string curr = (string)o["base"];
-            string date = (string)o["date"];
-
             double ChangeRate = (double)o["rates"][To.Value];
 
-            double result = ChangeRate * Value;
-            return result;
+            return ChangeRate * Value;
         }
     }
 }
