@@ -24,22 +24,25 @@ namespace CurrencyConverter
         private void button1_Click(object sender, EventArgs e)
         {
             // Get Method Names and fill the Comboboxes
-            MethodInfo[] methodInfos = Type.GetType("CurrencyConverter.Currency")
+           /* MethodInfo[] methodInfos = Type.GetType("CurrencyConverter.Currency")
                            .GetMethods(BindingFlags.Public | BindingFlags.Static);
             foreach (var item in methodInfos)
             {
                 string currentItem = item.Name.Substring(4);
                 comboBox1.Items.Add(currentItem);
                 comboBox2.Items.Add(currentItem);
-            }
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
+            }*/
+            
 
             richTextBox1.Clear();
             foreach (Rate item in Money.GetRates(Currency.EUR))
             {
+                comboBox1.Items.Add(item.CurrencyName);
+                comboBox2.Items.Add(item.CurrencyName);
                 richTextBox1.AppendText(item.CurrencyName + " = " + item.Value + "\n");
             }
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
 
             toolStripStatusLabel1.Text = Money.Date;
         }
