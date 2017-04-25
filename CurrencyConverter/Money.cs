@@ -12,7 +12,15 @@ namespace CurrencyConverter
     {
         // Base URL for the API
         const string baseUrl = "https://api.fixer.io/";
+        public static string Date { get {
+                string url = baseUrl + "latest";
+                WebClient wc = new WebClient();
+                string jsonData = wc.DownloadString(url);
 
+                JObject o = JObject.Parse(jsonData);
+
+                return (string)o["date"];
+            } }
         /// <summary>
         /// Get a List with all available conversion rates
         /// </summary>
@@ -27,8 +35,9 @@ namespace CurrencyConverter
             string jsonData = wc.DownloadString(url);
             
             JObject o = JObject.Parse(jsonData);
-            string date = (string)o["date"];
             JToken rates = o["rates"];          
+
+
 
             IList<Rate> RatesList = new List<Rate>();
             foreach (JProperty item in rates)

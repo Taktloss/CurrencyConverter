@@ -10,7 +10,7 @@ namespace CurrencyConverter
     {
         public string Value { get; set; }
 
-        private Currency(string value) { Value = value; }
+        public Currency(string value) { Value = value; }
         public static Currency AUD { get { return new Currency("AUD"); } }
         public static Currency BGN { get { return new Currency("BGN"); } }
         public static Currency BRL { get { return new Currency("BRL"); } }
@@ -20,6 +20,7 @@ namespace CurrencyConverter
         public static Currency CZK { get { return new Currency("CZK"); } }
         public static Currency DKK { get { return new Currency("DKK"); } }
         public static Currency EUR { get { return new Currency("EUR"); } }
+        public static Currency GBP { get { return new Currency("GBP"); } }
         public static Currency HKD { get { return new Currency("HKD"); } }
         public static Currency HRK { get { return new Currency("HRK"); } }
         public static Currency HUF { get { return new Currency("HUF"); } }
