@@ -24,6 +24,7 @@ namespace CurrencyConverter
                 string jsonData = wc.DownloadString(url);
                 JObject o = JObject.Parse(jsonData);
 
+
                 return (string)o["date"];
             }
         }
