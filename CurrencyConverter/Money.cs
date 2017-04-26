@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,14 +19,15 @@ namespace CurrencyConverter
         /// </summary>
         public static string Date { get {
                 string url = baseUrl + "latest";
+
                 WebClient wc = new WebClient();
                 string jsonData = wc.DownloadString(url);
-
                 JObject o = JObject.Parse(jsonData);
 
                 return (string)o["date"];
-            } }
-        
+            }
+        }
+
         /// <summary>
         /// Get a List with all available conversion rates
         /// </summary>
